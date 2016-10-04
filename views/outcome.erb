@@ -1,0 +1,27 @@
+<% require 'pry' %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Outcome</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Outcome</h1>
+    </header>
+    <% if user_has_won?(@user, @computer) %>
+      <h3><%= session[:username] %>'s <%= @user %> beat the Computer's <%= @computer %>.</h3>
+
+    <% elsif computer_has_won?(@user, @computer) %>
+      <h3>The Computer's <%= @computer %> beat <%= session[:username] %>'s <%= @user %>.</h3>
+
+    <% else %>
+      <h3>It's a Tie.</h3>
+    <% end %>
+
+    <p>
+      <a href="/reset">Try Again</a>
+    </p>
+
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mega Multiplayer Live-Action RPS</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Mega Multiplayer Live-Action RPS</h1>
+    </header>
+
+    <% if session[:username] %>
+      <h2>Hello, <%= session[:username] %>!</h2>
+      <h3>The score is...<BR>
+      <%= session[:username] + ": " + session[:user_wins].to_s %><BR>
+      Computer: <%= session[:computer_wins].to_s %></h3>
+
+      <% if session[:user_wins] == 3 %>
+        <h2><%= session[:username] %> has won 3 rounds and the game.</h2>
+        <p>
+          <a href="/new_game">Play a New Game?</a>
+        </p>
+      <% elsif session[:computer_wins] == 3 %>
+        <h2>The Computer has won 3 rounds and the game.</h2>
+        <p>
+          <a href="/new_game">Play a New Game?</a>
+        </p>
+      <% else %>
+        <form action="/users_choice" method="post">
+          <div class="users_choice">
+            <label for="users_choice">Please select: </label>
+            <input type="radio" id="users_choice" name="users_choice" value="Rock" required> Rock</input>
+            <input type="radio" name="users_choice" value="Paper"> Paper</input>
+            <input type="radio" name="users_choice" value="Scissors"> Scissors</input>
+          </div>
+
+          <div class="form-group">
+            <input type="submit">
+          </div>
+        </form>
+
+        <p>
+          <a href="/reset">Clear Choice</a>
+        </p>
+      <% end %>
+
+    <% else %>
+      <%= erb :form %>
+    <% end %>
+  </body>
+</html>
